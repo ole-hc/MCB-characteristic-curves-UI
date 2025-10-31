@@ -1,0 +1,1 @@
+I tried to design the Ui simple and intuitive using colors to guide the user to visual only and action elements. I`ve chosen a dark mode design with blue accents as it gives a professional and polished look.
