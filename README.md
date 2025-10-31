@@ -9,7 +9,7 @@ I've designed a first visual UI prototype shown in the picture below. I tried to
 
 
 ## UI hierarchy structure
-The following diagram documents the different UI-elements and how they are nested in each other. The raw diagram file is save in 'documentation/UI-Layout-Architecture.drawio' and can be edited using the web tools hosted on [draw.io](https://draw.io).
+The following diagram documents the different UI-elements and how they are nested within each other. The raw diagram file is save in 'documentation/UI-Layout-Architecture.drawio' and can be edited using the web tools hosted on [draw.io](https://draw.io).
 
 ![UI-hierarchy-diagram](documentation/UI-Layout-Architecture.png)
 
