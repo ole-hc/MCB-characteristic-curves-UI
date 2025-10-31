@@ -14,19 +14,15 @@ class TextDisplayGray(QLabel):
 class FunctionDisplayHorizontalLayout(QHBoxLayout):
     def __init__(self):
         super().__init__()
-        leftWidget = TextDisplayGray("f(x) = mx+b")
-        rightWidget = QWidget()
-        self.addWidget(leftWidget)
-        self.addWidget(rightWidget)
+        functionDisplay = TextDisplayGray("f(x) = mx+b")
+        spacer = QWidget()
+        self.addWidget(functionDisplay)
+        self.addWidget(spacer)
 
 
-class MainWindow(QMainWindow):
+class CentralWidget(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("MCB characteristics curves UI")
-        centralWidget = QWidget()
-        self.setCentralWidget(centralWidget)
-
         # setup general ui layout
         # □ □   » display of the function inside the graph
         # □     » all of the Ui functionality with own layout
@@ -34,7 +30,16 @@ class MainWindow(QMainWindow):
         mainVerticalLayout = QVBoxLayout()
         functionDisplayHorizontalLayout = FunctionDisplayHorizontalLayout()
         mainVerticalLayout.addLayout(functionDisplayHorizontalLayout)
-        centralWidget.setLayout(mainVerticalLayout)
+        self.setLayout(mainVerticalLayout)
+
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("MCB characteristics curves UI")
+        centralWidget = CentralWidget()
+        self.setCentralWidget(centralWidget)
+
         
 
 userInterface = QApplication(sys.argv)
