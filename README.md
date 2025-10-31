@@ -6,3 +6,9 @@ Interactive mapping of the characteristic curves of a miniature circuit breaker 
 I've designed a first visual UI prototype shown in the picture below. I tried to keep the UI simple and intuitive using colors to guide the user to visual only or action elements. A dark design with blue accents is used as the color scheme, as this conveys a professional and elegant impression.
 
 ![first-visual-ui-prototype](documentation/first-layout-prototype.png)
+
+
+## UI hierarchy structure
+The following diagram documents the different Ui-elements and how they are nested in each other. The raw diagram file is save in 'documentation/Ui-Layout-Architecture.drawio' and can be edited using the web tools hosted under [draw.io](https://draw.io)
+
+![Ui-hierarchy-diagram](documentation/UI-Layout-Architecture.png)
