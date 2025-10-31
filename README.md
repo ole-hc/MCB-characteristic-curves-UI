@@ -22,5 +22,6 @@ The characteristic curves do not represent specific functions, but rather ranges
 
 (source: [onesto-ep.com](https://www.onesto-ep.com/de/blog/explaining-the-tripping-curves-of-type-a-b-c-and-d-mcb/))
 
-![MCB-characteristics-curves](documentation/MCB-characteristics-curves.png)
+![MCB-characteristics-curves]()
+
 (source: [wikipedia.org](https://en.wikipedia.org/wiki/File:Standard_Trip_Characteristic_of_a_Thermomagnetic_Circuit_Breaker.svg))
