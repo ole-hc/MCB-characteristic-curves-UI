@@ -20,16 +20,44 @@ class FunctionDisplayHorizontalLayout(QHBoxLayout):
         self.addWidget(spacer)
 
 
+class PlaceholderBackground(QLabel):
+    def __init__(self):
+        super().__init__()
+
+
+class FunctionalHorizontalLayout(QHBoxLayout):
+    def __init__(self):
+        super().__init__()
+        text = TextDisplayGray("adhadhadha")
+        self.addWidget(text)
+
+
+class MainWidget(QWidget):
+    def __init__(self):
+        super().__init__()
+        functionalHorizontalLayout = FunctionalHorizontalLayout()
+        self.setLayout(functionalHorizontalLayout)
+
+
 class CentralWidget(QWidget):
     def __init__(self):
         super().__init__()
         # setup general ui layout
         # □ □   » display of the function inside the graph
+        # □     » black placeholder label
         # □     » all of the Ui functionality with own layout
 
         mainVerticalLayout = QVBoxLayout()
+
         functionDisplayHorizontalLayout = FunctionDisplayHorizontalLayout()
         mainVerticalLayout.addLayout(functionDisplayHorizontalLayout)
+
+        placeholderBackground = PlaceholderBackground()
+        mainVerticalLayout.addWidget(placeholderBackground)
+
+        functionalHorizontalLayout = FunctionalHorizontalLayout()
+        mainVerticalLayout.addLayout(functionalHorizontalLayout)
+
         self.setLayout(mainVerticalLayout)
 
 

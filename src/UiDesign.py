@@ -8,6 +8,10 @@ TextDisplayGray {
     font-size: 14px;
 }
 
+BlackPlaceholderLabel {
+    background-color: #8E8E93;
+}
+
 MainWindow {
     background-color: #2C2C2E
 }
