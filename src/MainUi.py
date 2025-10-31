@@ -25,6 +25,11 @@ class PlaceholderBackground(QLabel):
         super().__init__()
 
 
+class CoordinateSystem(QWidget):
+    def __init__(self):
+        super().__init__()
+
+
 class FunctionalHorizontalLayout(QHBoxLayout):
     def __init__(self):
         super().__init__()
