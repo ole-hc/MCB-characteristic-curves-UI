@@ -26,17 +26,18 @@ class PlaceholderBackground(QLabel):
         super().__init__()
 
 
-class CoordinateSystem(QWidget):
+class CoordinateSystem(PlotWidget):
     def __init__(self):
         super().__init__()
-        
-
+        minutes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        temperature = [30, 32, 34, 32, 33, 31, 29, 32, 35, 30]
+        self.plot()
 
 class FunctionalHorizontalLayout(QHBoxLayout):
     def __init__(self):
         super().__init__()
-        self.text = TextDisplayGray("adhadhadha")
-        self.addWidget(self.text)
+        self.coordinateSystem = CoordinateSystem()
+        self.addWidget(self.coordinateSystem)
 
 
 class MainWidget(QWidget):
