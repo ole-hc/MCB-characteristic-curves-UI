@@ -9,9 +9,11 @@ I've designed a first visual UI prototype shown in the picture below. I tried to
 
 
 ## UI hierarchy structure
-The following diagram documents the different UI-elements and how they are nested within each other. The raw diagram file is save in 'documentation/UI-Layout-Architecture.drawio' and can be edited using the web tools hosted on [draw.io](https://draw.io).
+The following diagrams documents the different UI-elements and how they are nested within each other. The raw diagram file is save in `documentation/UI-Layout-Architecture.drawio` and can be edited using the web tools hosted on [draw.io](https://draw.io).
 
 ![UI-hierarchy-diagram](documentation/UI-Layout-Architecture.png)
+
+![UI-hierarchy-diagram-SwitchTimeCalculator](documentation/UI-Layout-Architecture-SwitchTimeCalculator.png)
 
 # Explanation of MCB characteristics curves
 The characteristics curve shows how fast a MCB reacts to different amperage (example depicted below). The X-Axis is specified in multiples of the rated current printed on the circuit breaker. The Y-Axis shows the time the MCB need to react in seconds on a **logarithmic scale**. 
