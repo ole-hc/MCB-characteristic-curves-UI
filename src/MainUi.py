@@ -6,7 +6,15 @@ import UiDesign
 
 import sys
 
+GRAPH_AMOUNT = 5
+
 class TextDisplayGray(QLabel):
+    def __init__(self, text: str):
+        super().__init__()
+        self.setText(text)
+
+
+class TextDisplayBackground(QLabel):
     def __init__(self, text: str):
         super().__init__()
         self.setText(text)
@@ -31,17 +39,65 @@ class PlaceholderBackground(QLabel):
         super().__init__()
 
 
+class TextInput(QLineEdit):
+    def __init__(self, placeholderText: str):
+            super().__init__()
+            self.setPlaceholderText(placeholderText)
+
+
+class SwitchTimeIdentifier(QVBoxLayout):
+    def __init__(self):
+            super().__init__()
+            self.placeholder = PlaceholderBackground()
+            self.addWidget(self.placeholder)
+
+            for graph in range(0, GRAPH_AMOUNT):
+                descriptionText = "Graph " + str(graph)
+                self.graphIdentifier = TextDisplayBackground(descriptionText)
+                self.addWidget(self.graphIdentifier)
+
+
+class SwitchTimeSolution(QVBoxLayout):
+    def __init__(self):
+            super().__init__()
+            self.outputIdentifier = TextDisplayBackground("Time in seconds:")
+            self.addWidget(self.outputIdentifier)
+
+            for graph in range(0, GRAPH_AMOUNT):
+                self.textDisplayGray = TextDisplayGray("")
+                self.addWidget(self.textDisplayGray)
+
+
+class SwitchCurrentInput(QVBoxLayout):
+     def __init__(self):
+            super().__init__()
+            self.topInputIdentifier = TextDisplayBackground("Current")
+            self.addWidget(self.topInputIdentifier)
+
+            self.textInput = TextInput("Enter rated current")
+            self.addWidget(self.textInput)
+
+            self.bottomInputIdentifier = TextDisplayBackground("[x * rated current]")
+            self.addWidget(self.bottomInputIdentifier)
+
+
 class SwitchTimeCalculator(QHBoxLayout):
     def __init__(self):
             super().__init__()
-            self.text = TextDisplayGray("JO")
-            self.addWidget(self.text)
+            self.switchCurrentInput = SwitchCurrentInput()
+            self.addLayout(self.switchCurrentInput)
+
+            self.switchTimeSolution = SwitchTimeSolution()
+            self.addLayout(self.switchTimeSolution)
+
+            self.switchTimeIdentifier = SwitchTimeIdentifier()
+            self.addLayout(self.switchTimeIdentifier)
 
 
 class GraphSelector(QVBoxLayout):
     def __init__(self):
             super().__init__()
-            for graph in range(0, 5):
+            for graph in range(0, GRAPH_AMOUNT):
                 checkboxText = "Graph " + str(graph)
                 self.graphSelectionBox = GraphSelectionBox(checkboxText)
                 self.addWidget(self.graphSelectionBox)
@@ -54,6 +110,7 @@ class CoordinateSystem(PlotWidget):
         temperature = [30, 32, 34, 32, 33, 31, 29, 32, 35, 30]
         self.plot()
 
+
 class FunctionalHorizontalLayout(QHBoxLayout):
     def __init__(self):
         super().__init__()
@@ -63,12 +120,8 @@ class FunctionalHorizontalLayout(QHBoxLayout):
         self.graphSelector = GraphSelector()
         self.addLayout(self.graphSelector)
 
-
-class MainWidget(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.functionalHorizontalLayout = FunctionalHorizontalLayout()
-        self.setLayout(self.functionalHorizontalLayout)
+        self.switchTimeCalculator = SwitchTimeCalculator()
+        self.addLayout(self.switchTimeCalculator)
 
 
 class CentralWidget(QWidget):
@@ -99,7 +152,6 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("MCB characteristics curves UI")
         self.centralWidget = CentralWidget()
         self.setCentralWidget(self.centralWidget)
-
         
 
 userInterface = QApplication(sys.argv)

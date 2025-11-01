@@ -12,6 +12,10 @@ BlackPlaceholderLabel {
     background-color: #8E8E93;
 }
 
+TextDisplayBackground {
+    background-color: #2C2C2E
+}
+
 MainWindow {
     background-color: #2C2C2E
 }
