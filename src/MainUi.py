@@ -12,6 +12,11 @@ class TextDisplayGray(QLabel):
         self.setText(text)
 
 
+class GraphSelectionBox(QCheckBox):
+    def __init__(self, text: str):
+        super().__init__(text) 
+
+
 class FunctionDisplayHorizontalLayout(QHBoxLayout):
     def __init__(self):
         super().__init__()
@@ -26,6 +31,22 @@ class PlaceholderBackground(QLabel):
         super().__init__()
 
 
+class SwitchTimeCalculator(QHBoxLayout):
+    def __init__(self):
+            super().__init__()
+            self.text = TextDisplayGray("JO")
+            self.addWidget(self.text)
+
+
+class GraphSelector(QVBoxLayout):
+    def __init__(self):
+            super().__init__()
+            for graph in range(0, 5):
+                checkboxText = "Graph " + str(graph)
+                self.graphSelectionBox = GraphSelectionBox(checkboxText)
+                self.addWidget(self.graphSelectionBox)
+
+
 class CoordinateSystem(PlotWidget):
     def __init__(self):
         super().__init__()
@@ -38,6 +59,9 @@ class FunctionalHorizontalLayout(QHBoxLayout):
         super().__init__()
         self.coordinateSystem = CoordinateSystem()
         self.addWidget(self.coordinateSystem)
+
+        self.graphSelector = GraphSelector()
+        self.addLayout(self.graphSelector)
 
 
 class MainWidget(QWidget):
