@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import QColor, QColor, QPalette
+from pyqtgraph import *
 
 import UiDesign
 
@@ -14,10 +15,10 @@ class TextDisplayGray(QLabel):
 class FunctionDisplayHorizontalLayout(QHBoxLayout):
     def __init__(self):
         super().__init__()
-        functionDisplay = TextDisplayGray("f(x) = mx+b")
-        spacer = QWidget()
-        self.addWidget(functionDisplay)
-        self.addWidget(spacer)
+        self.functionDisplay = TextDisplayGray("f(x) = mx+b")
+        self.spacer = QWidget()
+        self.addWidget(self.functionDisplay)
+        self.addWidget(self.spacer)
 
 
 class PlaceholderBackground(QLabel):
@@ -28,20 +29,21 @@ class PlaceholderBackground(QLabel):
 class CoordinateSystem(QWidget):
     def __init__(self):
         super().__init__()
+        
 
 
 class FunctionalHorizontalLayout(QHBoxLayout):
     def __init__(self):
         super().__init__()
-        text = TextDisplayGray("adhadhadha")
-        self.addWidget(text)
+        self.text = TextDisplayGray("adhadhadha")
+        self.addWidget(self.text)
 
 
 class MainWidget(QWidget):
     def __init__(self):
         super().__init__()
-        functionalHorizontalLayout = FunctionalHorizontalLayout()
-        self.setLayout(functionalHorizontalLayout)
+        self.functionalHorizontalLayout = FunctionalHorizontalLayout()
+        self.setLayout(self.functionalHorizontalLayout)
 
 
 class CentralWidget(QWidget):
@@ -52,26 +54,26 @@ class CentralWidget(QWidget):
         # □     » black placeholder label
         # □     » all of the Ui functionality with own layout
 
-        mainVerticalLayout = QVBoxLayout()
+        self.mainVerticalLayout = QVBoxLayout()
 
-        functionDisplayHorizontalLayout = FunctionDisplayHorizontalLayout()
-        mainVerticalLayout.addLayout(functionDisplayHorizontalLayout)
+        self.functionDisplayHorizontalLayout = FunctionDisplayHorizontalLayout()
+        self.mainVerticalLayout.addLayout(self.functionDisplayHorizontalLayout)
 
-        placeholderBackground = PlaceholderBackground()
-        mainVerticalLayout.addWidget(placeholderBackground)
+        self.placeholderBackground = PlaceholderBackground()
+        self.mainVerticalLayout.addWidget(self.placeholderBackground)
 
-        functionalHorizontalLayout = FunctionalHorizontalLayout()
-        mainVerticalLayout.addLayout(functionalHorizontalLayout)
+        self.functionalHorizontalLayout = FunctionalHorizontalLayout()
+        self.mainVerticalLayout.addLayout(self.functionalHorizontalLayout)
 
-        self.setLayout(mainVerticalLayout)
+        self.setLayout(self.mainVerticalLayout)
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("MCB characteristics curves UI")
-        centralWidget = CentralWidget()
-        self.setCentralWidget(centralWidget)
+        self.centralWidget = CentralWidget()
+        self.setCentralWidget(self.centralWidget)
 
         
 
