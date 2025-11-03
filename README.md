@@ -55,7 +55,18 @@ In order to perform a cubic interpolation, some points of the function equation 
 
 ![MCB-typeB-characteristics-curves](documentation/Characteristics-curve-typeB-MCB.png)
 
-(source: [www.conrad.com](https://asset.conrad.com/media10/add/160267/c1/-/de/000627112DS01/podatkovna-tablica-627112-hager-mcn116-zastitna-sklopka-za-vodove-1-polni-16-a.pdf)
+(source: [www.conrad.com](https://asset.conrad.com/media10/add/160267/c1/-/de/000627112DS01/podatkovna-tablica-627112-hager-mcn116-zastitna-sklopka-za-vodove-1-polni-16-a.pdf))
 
-| x * rated current   | 1,5  | 4,5    |
-| time in seconds     | 400  | 5      | 
+<table>
+  <tr>
+    <th>x * rated current</th>
+    <td>1,5</td>
+    <td>4,5</td>
+  </tr>
+  <tr>
+    <th>time in seconds</th>
+    <td>400</td>
+    <td>5</td>
+  </tr>
+</table>
+
