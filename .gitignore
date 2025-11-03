@@ -205,3 +205,11 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# === Build output ===
+# C++ executables
+Cubic_interpolation
+*.out
+*.exe
+*.o
+*.obj
