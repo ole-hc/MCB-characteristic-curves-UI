@@ -208,7 +208,7 @@ __marimo__/
 
 # === Build output ===
 # C++ executables
-Cubic_interpolation
+CubicInterpolation
 *.out
 *.exe
 *.o
