@@ -27,3 +27,26 @@ The characteristic curves do not represent specific functions, but rather ranges
 ![MCB-characteristics-curves](documentation/MCB-characteristics-curves.png)
 
 (source: [wikipedia.org](https://en.wikipedia.org/wiki/File:Standard_Trip_Characteristic_of_a_Thermomagnetic_Circuit_Breaker.svg))
+
+# Approximation of the characteristic curve
+Since neither precise function definitions nor detailed value tables of characteristic curves seem to exist online, it becomes somewhat more complicated to build the mathematical background of the project. First, we need to extract precise and usable data from the characteristic curve diagrams and then create the corresponding function ourselves using cubic interpolation, a method for designing functions when only a few ordered points are given. 
+
+
+Before we begin, we need to define some boundary conditions:
+
+- Only the rightmost graph of each MCB type is relevant for us.
+
+- There is a part of the resulting equation which applies to all MCB-types up to a certain type-dependent point.
+
+- At the discontinuous point of the graph, where it drops vertically downwards, only the lowest value is relevant for our function.
+
+The characteristic curve of a specific type can therefore be divided into three parts:
+
+1. A portion of the common thermal curve
+2. The transition of the thermal curve to the vertical drop
+3. The transition of the discontinuity to the approach of zero
+
+These parts can be developed using cubic interpolation which we will discuss in the next section.
+
+## Cubic interpolation 
+In order to perform a cubic interpolation, some points of the function equation must first be determined. Below the following image of the tripping characteristic of a type B MCB is a table of values ​​that can be clearly extracted and on which the later calculation of the characteristics curve function is based.
