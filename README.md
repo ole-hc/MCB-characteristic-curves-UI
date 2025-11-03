@@ -40,6 +40,8 @@ Before we begin, we need to define some boundary conditions:
 
 - At the discontinuous point of the graph, where it drops vertically downwards, only the lowest value is relevant for our function.
 
+- The maximum tripping time differs depending if the MCB switches AC / DC loads. We will be focusing on the AC dependant characteristics.
+
 The characteristic curve of a specific type can therefore be divided into three parts:
 
 1. A portion of the common thermal curve
@@ -50,3 +52,10 @@ These parts can be developed using cubic interpolation which we will discuss in 
 
 ## Cubic interpolation 
 In order to perform a cubic interpolation, some points of the function equation must first be determined. Below the following image of the tripping characteristic of a type B MCB is a table of values ​​that can be clearly extracted and on which the later calculation of the characteristics curve function is based.
+
+![MCB-typeB-characteristics-curves](documentation/Characteristics-curve-typeB-MCB.png)
+
+(source: [www.conrad.com](https://asset.conrad.com/media10/add/160267/c1/-/de/000627112DS01/podatkovna-tablica-627112-hager-mcn116-zastitna-sklopka-za-vodove-1-polni-16-a.pdf)
+
+| x * rated current   | 1,5  | 4,5    |
+| time in seconds     | 400  | 5      | 
