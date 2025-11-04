@@ -12,18 +12,62 @@ Matrix::~Matrix()
 
 void Matrix::printMatrix()
 {
-    for (size_t column = 0; column < columns; column++)
+    for (size_t line = 0; line < lines; line++)
     {
         cout << "| ";
-        for (size_t line = 0; line < lines; line++)
+        for (size_t column = 0; column < columns; column++)
         {
-            cout << values[column][line] << " | "; 
+            cout << values[line][column] << " | "; 
         }
         cout << "\n";
     }
 }
 
-void Matrix::divideMatrix(const Matrix &divident, const Matrix &devisor)
+float Matrix::determinant()
 {
-    
+    float determinant = 0.0f;
+    float sum = 0.0f;
+
+    for (size_t n = 0; n < columns; n++)
+    {
+        for (size_t column = n; column < (n + columns); column++)
+        {
+            size_t deltaColumn = column;
+            if(deltaColumn > (columns - 1)) {
+                deltaColumn = column - columns;
+            }
+            sum =+ values[(column - n)][deltaColumn];
+            cout << "(" << (column - n) << "|" << deltaColumn << ") ";
+        }
+        if(determinant == 0.0f)
+            determinant = sum;
+        determinant = determinant * sum;
+    } 
+
+    cout << "Positive part: " << determinant;
+    cout << "\n --- \n";
+
+    float difference = 0.0f;
+    for (size_t n = 0; n < columns; n++)
+    {
+        for (size_t column = n; column < (n + columns); column++)
+        {
+            size_t deltaColumn = column;
+            if(deltaColumn > (columns - 1)) {
+                deltaColumn = column - columns;
+            }
+
+            difference =- values[((columns - 1) - (column - n))][deltaColumn];
+            cout << "(" << ((columns - 1) - (column - n)) << "|" << deltaColumn << ") ";
+        }
+        determinant = determinant * difference;
+    } 
+
+    return determinant;
+}
+
+// first under determinant = normal determinant but the first column switched with the solution vector
+float Matrix::underDeterminant(const Matrix &_undMatrix)
+{
+    return 0.0f;
 }

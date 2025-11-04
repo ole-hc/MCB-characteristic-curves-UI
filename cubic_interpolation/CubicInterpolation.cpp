@@ -19,7 +19,9 @@ int main(void) {
     c.printMatrix();
     cout << "\n";
     a.printMatrix();
-
+    cout << "\n ------ \n";
+    float det = a.determinant();
+    cout << "\n\n --- " << det;
 
     return 0;
 }

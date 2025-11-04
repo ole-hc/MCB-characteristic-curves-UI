@@ -12,5 +12,6 @@ public:
     Matrix(int _m, int _n, vector<vector<float>>& _values);
     ~Matrix();
     void printMatrix();
-    void divideMatrix(const Matrix& divident, const Matrix& devisor); 
+    float determinant();
+    float underDeterminant(const Matrix& _undMatrix); 
 };
