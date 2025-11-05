@@ -26,7 +26,7 @@ void Matrix::printMatrix()
 float Matrix::determinant()
 {
     float determinant = 0.0f;
-    float sum = 0.0f;
+    float product = 1.0f;
 
     for (size_t n = 0; n < columns; n++)
     {
@@ -36,18 +36,12 @@ float Matrix::determinant()
             if(deltaColumn > (columns - 1)) {
                 deltaColumn = column - columns;
             }
-            sum =+ values[(column - n)][deltaColumn];
-            cout << "(" << (column - n) << "|" << deltaColumn << ") ";
+            product = product * values[(column - n)][deltaColumn];
         }
-        if(determinant == 0.0f)
-            determinant = sum;
-        determinant = determinant * sum;
+        determinant += product;
+        product = 1.0f;
     } 
 
-    cout << "Positive part: " << determinant;
-    cout << "\n --- \n";
-
-    float difference = 0.0f;
     for (size_t n = 0; n < columns; n++)
     {
         for (size_t column = n; column < (n + columns); column++)
@@ -57,10 +51,10 @@ float Matrix::determinant()
                 deltaColumn = column - columns;
             }
 
-            difference =- values[((columns - 1) - (column - n))][deltaColumn];
-            cout << "(" << ((columns - 1) - (column - n)) << "|" << deltaColumn << ") ";
+            product = product * values[((columns - 1) - (column - n))][deltaColumn];
         }
-        determinant = determinant * difference;
+        determinant -= product;
+        product = 1.0f;
     } 
 
     return determinant;
