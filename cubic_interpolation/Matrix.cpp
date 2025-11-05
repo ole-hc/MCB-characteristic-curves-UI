@@ -1,6 +1,7 @@
 #include "libs.h"
 #include "Matrix.h"
 
+// values is addressed values[line][column] in contrast to normal (column x lines) matrix addressing 
 Matrix::Matrix(int _columns, int _lines, vector<vector<float>> &_values)
     :columns(_columns), lines(_lines), values(_values)
 {
@@ -23,6 +24,7 @@ void Matrix::printMatrix()
     }
 }
 
+// calculates the determinant for a quadratic (m x m) matrix 
 float Matrix::determinant()
 {
     float determinant = 0.0f;
@@ -60,8 +62,16 @@ float Matrix::determinant()
     return determinant;
 }
 
-// first under determinant = normal determinant but the first column switched with the solution vector
-float Matrix::underDeterminant(const Matrix &_undMatrix)
-{
-    return 0.0f;
+// first under determinant = normal determinant but the first column switched with the solution vector (m x 1)
+float Matrix::underDeterminant(const Matrix &_undMatrix, int columnNr)
+{ 
+    columnNr--;
+    Matrix copy = Matrix(this->columns, this-> lines, this->values);
+    for (size_t line = 0; line < lines; line++)
+    {
+        copy.values[line][columnNr] = _undMatrix.values[line][0];
+    }
+
+    float determinant = copy.determinant();
+    return determinant;
 }

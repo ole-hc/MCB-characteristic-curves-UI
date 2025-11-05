@@ -13,5 +13,5 @@ public:
     ~Matrix();
     void printMatrix();
     float determinant();
-    float underDeterminant(const Matrix& _undMatrix); 
+    float underDeterminant(const Matrix& _undMatrix, int columnNr); 
 };

@@ -10,17 +10,19 @@ int main(void) {
     Matrix a = Matrix(3, 3, aValues);
 
     vector<vector<float>> cValues = {
-        {1.0f},
+        {-1.0f},
         {2.0f},
         {3.0f}
     };
-    Matrix c = Matrix(3, 1, cValues);
+    Matrix c = Matrix(1, 3, cValues);
 
     c.printMatrix();
     cout << "\n";
     a.printMatrix();
     float det = a.determinant();
     cout << "\n---\n" << det;
+    float u3det = a.underDeterminant(c, 3);
+    cout << "\n --- \n" << u3det;
 
     return 0;
 }
