@@ -3,7 +3,6 @@
 
 SystemOfEquations::SystemOfEquations(Matrix &_a, Matrix &_c)
     :a(_a), c(_c), b(solveSystemOfEquations())
-    // seg fault in constructor probably because there is no std constructor 
 {
 }
 
@@ -29,7 +28,7 @@ float SystemOfEquations::underDeterminant(int columnNr)
     Matrix switchedColumns = Matrix(a.getColumns(), a.getLines(), a.getValues());
     for (size_t line = 0; line < a.getLines(); line++)
     {
-        switchedColumns.setSpecificValue(line, columnNr, c.getSpecificValue(line, 0)); // seg Fault HERE !!! 
+        switchedColumns.setSpecificValue(line, columnNr, c.getSpecificValue(line, 0)); 
     }
 
     float determinant = switchedColumns.determinant();
