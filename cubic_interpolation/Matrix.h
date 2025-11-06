@@ -14,4 +14,5 @@ public:
     void printMatrix();
     float determinant();
     float underDeterminant(const Matrix& _undMatrix, int columnNr); 
+    Matrix solveSystemOfEquations(Matrix& _c);
 };

@@ -23,6 +23,9 @@ int main(void) {
     cout << "\n---\n" << det;
     float u3det = a.underDeterminant(c, 3);
     cout << "\n --- \n" << u3det;
+    Matrix solution = Matrix(a.solveSystemOfEquations(c));
+    cout << "\n --- \n";
+    solution.printMatrix();
 
     return 0;
 }

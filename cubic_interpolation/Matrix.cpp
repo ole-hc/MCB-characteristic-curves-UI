@@ -75,3 +75,29 @@ float Matrix::underDeterminant(const Matrix &_undMatrix, int columnNr)
     float determinant = copy.determinant();
     return determinant;
 }
+
+// solves system of equations in a x b = c form with a beeing a (m x m) Matrix and b, c beeing (m x 1) vectors
+// called on Matrix a
+// returns empty (2 x 2) Matrix on mainDeterminant = 0 --> not solvable or infinite solutions 
+Matrix Matrix::solveSystemOfEquations(Matrix &_c)
+{
+    float mainDeterminant = this->determinant();
+    if(mainDeterminant == 0) {
+        vector<vector<float>> errorValues = {
+            {0, 0},
+            {0, 0}
+        };
+        Matrix error = Matrix(2, 2, errorValues);
+        return error;
+    }
+
+    vector<vector<float>> bValues;
+    for (size_t line = 0; line < this->lines; line++)
+    {
+        float lineSolution = (this->underDeterminant(_c, (line + 1))/mainDeterminant);
+        bValues.push_back({lineSolution});
+    }
+    Matrix b = Matrix(1, _c.lines, bValues);
+
+    return b;
+}
