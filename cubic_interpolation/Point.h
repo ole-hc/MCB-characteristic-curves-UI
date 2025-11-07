@@ -9,4 +9,6 @@ private:
 public:
     Point(float _x, float _y);
     ~Point();
+    float getX();
+    float getY();
 };

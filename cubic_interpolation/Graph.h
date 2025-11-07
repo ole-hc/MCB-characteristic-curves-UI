@@ -9,7 +9,12 @@ private:
     vector<Point> points;
     int amountPoints;
 public:
-    Graph(vector<Point> _points, int _amountPoints);
+    Graph(vector<Point> _points);
     ~Graph();
     vector<Matrix> createMatrixes();
+    void evaluationAtKnownDataPoints(vector<vector<float>>& _a, vector<vector<float>>& _c);
+    void evaluationFirstDerivativeAtDataPoints(vector<vector<float>>& _a, vector<vector<float>>& _c);
+    void evaluationSecondDerivativeAtDataPoints(vector<vector<float>>& _a, vector<vector<float>>& _c);
+    void evaluationEndPointsAssumption(vector<vector<float>>& _a, vector<vector<float>>& _c);
+    vector<float> addSplineEquationToMatrixColumn(int _indexSpline, vector<float> _coefficient);
 };

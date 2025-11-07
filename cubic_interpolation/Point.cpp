@@ -10,3 +10,13 @@ Point::Point(float _x, float _y)
 Point::~Point()
 {
 }
+
+float Point::getX()
+{
+    return this->x;
+}
+
+float Point::getY()
+{
+    return this->y;
+}
