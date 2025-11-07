@@ -16,5 +16,6 @@ public:
     void evaluationFirstDerivativeAtDataPoints(vector<vector<float>>& _a, vector<vector<float>>& _c);
     void evaluationSecondDerivativeAtDataPoints(vector<vector<float>>& _a, vector<vector<float>>& _c);
     void evaluationEndPointsAssumption(vector<vector<float>>& _a, vector<vector<float>>& _c);
-    vector<float> addSplineEquationToMatrixColumn(int _indexSpline, vector<float> _coefficient);
+    vector<float> addSplineEquationToMatrixColumnOneEquation(int _indexSpline, vector<float> _coefficient);
+    vector<float> addSplineEquationToMatrixColumnTwoEquations(int _indexSpline,  int _indexSplineTwo, vector<float> _coefficient);
 };

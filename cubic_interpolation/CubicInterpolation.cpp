@@ -26,15 +26,11 @@ int main(void) {
         {8.0f, 10.0f}
     };
     Graph dataGraph = Graph(dataPoints);
-    dataGraph.createMatrixes();
+    vector<Matrix> soe;
+    soe = dataGraph.createMatrixes();
     cout << "\n ---------------------------- \n";
 
-    c.printMatrix();
-    cout << "\n";
-    a.printMatrix();
-    float det = a.determinant();
-    cout << "\n---\n  determinant of a = " << det << "\n---\n";
-    SystemOfEquations interpolation = SystemOfEquations(a, c);
+    SystemOfEquations interpolation = SystemOfEquations(soe.at(0), soe.at(1));
     interpolation.printSystemOfEquations();
 
     return 0;
