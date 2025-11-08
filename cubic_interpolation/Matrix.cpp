@@ -8,6 +8,29 @@ Matrix::Matrix(int _columns, int _lines, vector<vector<float>> &_values)
 {
 }
 
+// creates identity matrix 
+Matrix::Matrix(int _columns, int _lines)
+{
+    columns = _columns;
+    lines = _lines;
+    vector<vector<float>> _values;
+    for (size_t line = 0; line < lines; line++)
+    {
+        vector<float> _valuesLine;
+        for (size_t zeroBegin = 0; zeroBegin < line; zeroBegin++)
+        {
+            _valuesLine.push_back(0.0f);
+        }
+        _valuesLine.push_back(1.0f);
+        for (size_t zeroEnd = (line + 1); zeroEnd < columns; zeroEnd++)
+        {
+            _valuesLine.push_back(0.0f);
+        }
+        _values.push_back(_valuesLine);
+    }
+    values = _values;
+}
+
 Matrix::Matrix(const Matrix &_matrix)
 {
     columns = _matrix.columns;
@@ -70,6 +93,54 @@ float Matrix::determinant()
     return determinant;
 }
 
+void Matrix::switchLines(int lineA, int lineB)
+{
+    // decrement to match 1..n matrix addressing to 0..n-1 vector addressing
+    lineA--;
+    lineB--;
+
+    vector<float> saveLine = values[lineA];
+    values[lineA] = values[lineB];
+    values[lineB] = saveLine;
+}
+
+int Matrix::findLineBiggestAbsoluteValue(int column, int startLine)
+{
+    // decrement to match 1..n matrix addressing to 0..n-1 vector addressing
+    column--;
+    startLine--;
+
+    int biggestAbsoluteValueIndex = startLine;
+    for (size_t line = startLine; line < lines; line++)
+    {
+        if(fabs(values[line][column]) > fabs(values[biggestAbsoluteValueIndex][column]))
+            biggestAbsoluteValueIndex = line;
+    }
+    
+    // increment to match 1..n matrix addressing to 0..n-1 vector addressing
+    return (biggestAbsoluteValueIndex + 1);
+}
+
+// returns the coefficient with witch line A must be multiplied for a B - A substraction to equate to zero
+float Matrix::findCoefficientForLineBminusXA(int column, int lineB, int lineA)
+{
+    // decrement to match 1..n matrix addressing to 0..n-1 vector addressing
+    lineA--;
+    lineB--;
+    column--;
+    return (values[lineB][column] / values[lineA][column]);
+}
+
+
+// lineA = lineA - (c * lineB)
+void Matrix::subtractTwoLinesWithCoefficient(int lineA, int lineB, float coefficient)
+{
+    for (size_t column = 0; column < columns; column++)
+    {
+        values[lineA][column] = (values[lineA][column] - (coefficient *  values[lineB][column]));
+    }
+}
+
 int Matrix::getLines()
 {
     return this->lines;
@@ -85,12 +156,12 @@ vector<vector<float>>& Matrix::getValues()
     return this->values;
 }
 
-float Matrix::getSpecificValue(int _column, int _line)
+float Matrix::getSpecificValue(int _line, int _column)
 {
-    return this->values[_column][_line];
+    return this->values[_line][_column];
 }
 
-void Matrix::setSpecificValue(int _column, int _line, float _value)
+void Matrix::setSpecificValue(int _line, int _column, float _value)
 {
-    this->values[_column][_line] = _value;
+    this->values[_line][_column] = _value;
 }

@@ -19,4 +19,5 @@ public:
     void printSystemOfEquations();
     float underDeterminant(int columnNr); 
     Matrix solveSystemOfEquations();
+    Matrix solveSystemOfEquationsCramersRule();
 };

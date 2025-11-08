@@ -36,9 +36,42 @@ float SystemOfEquations::underDeterminant(int columnNr)
 }
 
 // solves system of equations in a x b = c form with a beeing a (m x m) Matrix and b, c beeing (m x 1) vectors
-// called on Matrix a
+// uses LR decomposition with pivoting
+// p * a * b = p * c
+// p * a = l * r
 // returns empty (2 x 2) Matrix on mainDeterminant = 0 --> not solvable or infinite solutions 
 Matrix SystemOfEquations::solveSystemOfEquations()
+{
+    Matrix p = Matrix(a.getColumns(), a.getLines());
+    Matrix l = Matrix(a.getColumns(), a.getLines());
+
+    for (size_t workingLine = 0; workingLine < a.getLines(); workingLine++)
+    {
+        // find pivot and switch lines accordingly in matrix a and p 
+        int indexBiggestAbsolute = a.findLineBiggestAbsoluteValue((workingLine + 1), (workingLine + 1));
+        a.switchLines((workingLine + 1), indexBiggestAbsolute);
+        p.switchLines((workingLine + 1), indexBiggestAbsolute);
+
+        for (size_t line = (workingLine + 1); line < a.getLines(); line++)
+        {
+            float coefficient = a.findCoefficientForLineBminusXA((workingLine + 1), (line + 1), (workingLine + 1));
+            a.subtractTwoLinesWithCoefficient(line, workingLine, coefficient);
+            l.setSpecificValue(line, workingLine, coefficient);
+        }
+        cout << "R: " << endl;
+        a.printMatrix();
+        cout << "P: " << endl;
+        p.printMatrix();
+        cout << "L: " << endl;
+        l.printMatrix();
+        cout << endl;
+    }
+    return p;
+}
+
+// solves system of equations in a x b = c form with a beeing a (m x m) Matrix and b, c beeing (m x 1) vectors
+// returns empty (2 x 2) Matrix on mainDeterminant = 0 --> not solvable or infinite solutions 
+Matrix SystemOfEquations::solveSystemOfEquationsCramersRule()
 {
     float mainDeterminant = a.determinant();
     if(mainDeterminant == 0) {
