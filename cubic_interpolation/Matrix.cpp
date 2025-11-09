@@ -158,7 +158,6 @@ Matrix Matrix::multiplyMatrix(Matrix &factor)
             float specificValue = 0.0;
             for (size_t value = 0; value < columns; value++)
             {
-                cout << this->getSpecificValue(line, value) << " * " << factor.getSpecificValue(value, column) << " + ";
                 specificValue += this->getSpecificValue(line, value) * factor.getSpecificValue(value, column);
             }
             productValuesLines.push_back(specificValue);
@@ -167,9 +166,6 @@ Matrix Matrix::multiplyMatrix(Matrix &factor)
         productValues.push_back(productValuesLines);
     }
     Matrix product = Matrix(factor.getColumns(), this->lines, productValues);
-    cout << "PRODUCT: \n";
-    product.printMatrix();
-    cout << endl;
     return product;
 }
 

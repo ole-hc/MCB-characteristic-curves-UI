@@ -25,23 +25,16 @@ int main(void) {
         {5.0f, 9.0f},
         {8.0f, 10.0f}
     };
-    // Graph dataGraph = Graph(dataPoints);
-    // vector<Matrix> soe;
-    // soe = dataGraph.createMatrixes();
-    // cout << "\n ---------------------------- \n";
-    // 
-    // SystemOfEquations interpolation = SystemOfEquations(soe.at(0), soe.at(1));
-    // interpolation.printSystemOfEquations();
-
-    Matrix unitMatrix = Matrix(3, 3);
-    unitMatrix.printMatrix();
-    unitMatrix.switchLines(2,3);
-    cout << "\n";
-    unitMatrix.printMatrix();
-    cout << "\n";
-    cout << "Biggest absolute value of a: " << a.findLineBiggestAbsoluteValue(3, 0) << endl;
-    SystemOfEquations interpolation = SystemOfEquations(a, c);
+    Graph dataGraph = Graph(dataPoints);
+    vector<Matrix> soe;
+    soe = dataGraph.createMatrixes();
+    cout << "\n ---------------------------- \n";
+     
+    SystemOfEquations interpolation = SystemOfEquations(soe.at(0), soe.at(1));
     interpolation.printSystemOfEquations();
+
+    // SystemOfEquations interpolation = SystemOfEquations(a, c);
+    // interpolation.printSystemOfEquations();
 
     return 0;
 }

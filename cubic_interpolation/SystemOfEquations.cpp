@@ -69,8 +69,32 @@ Matrix SystemOfEquations::solveSystemOfEquations()
         cout << endl;
     }
 
-    p.multiplyMatrix(c);
-    return p;
+    a = l;
+    p = p.multiplyMatrix(c);
+    Matrix solution = solveLowerTriangularMatrix(l, p);
+    return solution;
+}
+
+// solves triangular matrix l = p and return solution vector
+// example:
+// ( 1 0 0 )       ( p1 )       ( 2 )
+// ( 2 1 0 )   *   ( p2 )   =   ( 4 )
+// ( 7 3 1 )       ( p3 )       ( 1 )
+Matrix SystemOfEquations::solveLowerTriangularMatrix(Matrix l, Matrix p)
+{
+    vector<vector<float>> solutionValues;
+    for (size_t line = 0; line < l.getLines(); line++)
+    {
+        float lineSolution = 0.0;
+        for (size_t column = 0; column < line; column++)
+        {
+            lineSolution += (l.getSpecificValue(line, column) * solutionValues[column][0]);
+        }
+        lineSolution = p.getSpecificValue(line, 0) - lineSolution;
+        solutionValues.push_back({lineSolution});
+    }
+    Matrix solution = Matrix(p.getColumns(), l.getLines(), solutionValues);
+    return solution;
 }
 
 // solves system of equations in a x b = c form with a beeing a (m x m) Matrix and b, c beeing (m x 1) vectors
