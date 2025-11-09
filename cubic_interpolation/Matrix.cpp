@@ -141,6 +141,38 @@ void Matrix::subtractTwoLinesWithCoefficient(int lineA, int lineB, float coeffic
     }
 }
 
+// return = self * factor
+Matrix Matrix::multiplyMatrix(Matrix &factor)
+{
+    if (this->columns != factor.getLines())
+    {
+        cout << "Error while multiplying matrixes: lines and columns do not match!" << endl;
+        return factor;
+    }
+    vector<vector<float>> productValues;
+    for (size_t line = 0; line < lines; line++)
+    {
+        vector<float> productValuesLines;
+        for (size_t column = 0; column < factor.getColumns(); column++)
+        {
+            float specificValue = 0.0;
+            for (size_t value = 0; value < columns; value++)
+            {
+                cout << this->getSpecificValue(line, value) << " * " << factor.getSpecificValue(value, column) << " + ";
+                specificValue += this->getSpecificValue(line, value) * factor.getSpecificValue(value, column);
+            }
+            productValuesLines.push_back(specificValue);
+            cout << endl;
+        }
+        productValues.push_back(productValuesLines);
+    }
+    Matrix product = Matrix(factor.getColumns(), this->lines, productValues);
+    cout << "PRODUCT: \n";
+    product.printMatrix();
+    cout << endl;
+    return product;
+}
+
 int Matrix::getLines()
 {
     return this->lines;

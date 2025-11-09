@@ -38,7 +38,9 @@ float SystemOfEquations::underDeterminant(int columnNr)
 // solves system of equations in a x b = c form with a beeing a (m x m) Matrix and b, c beeing (m x 1) vectors
 // uses LR decomposition with pivoting
 // p * a * b = p * c
-// p * a = l * r
+// a = l * r
+// ---
+// p * l * y = p * c
 // returns empty (2 x 2) Matrix on mainDeterminant = 0 --> not solvable or infinite solutions 
 Matrix SystemOfEquations::solveSystemOfEquations()
 {
@@ -66,6 +68,8 @@ Matrix SystemOfEquations::solveSystemOfEquations()
         l.printMatrix();
         cout << endl;
     }
+
+    p.multiplyMatrix(c);
     return p;
 }
 

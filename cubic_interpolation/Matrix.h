@@ -19,6 +19,7 @@ public:
     int findLineBiggestAbsoluteValue(int column, int startLine);
     float findCoefficientForLineBminusXA(int column, int lineB, int lineA);
     void subtractTwoLinesWithCoefficient(int lineA, int lineB, float coefficient);
+    Matrix multiplyMatrix(Matrix& factor);
     int getLines();
     int getColumns();
     vector<vector<float>>& getValues();
