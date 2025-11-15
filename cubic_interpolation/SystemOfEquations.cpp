@@ -48,7 +48,7 @@ Matrix SystemOfEquations::solveSystemOfEquations()
     Matrix l = Matrix(a.getColumns(), a.getLines());
     Matrix r = a;
 
-    for (size_t workingLine = 0; workingLine < a.getLines(); workingLine++)
+    for (size_t workingLine = 0; workingLine < r.getLines(); workingLine++)
     {
         // find pivot and switch lines accordingly in matrix a and p 
         int indexBiggestAbsolute = r.findLineBiggestAbsoluteValue((workingLine + 1), (workingLine + 1));
@@ -72,6 +72,7 @@ Matrix SystemOfEquations::solveSystemOfEquations()
 
     Matrix pc = p.multiplyMatrix(c);
     Matrix y = solveLowerTriangularMatrix(l, pc);
+    y.printMatrix();
     Matrix x = solveUpperTriangularMatrix(r, y);
     return x;
 }

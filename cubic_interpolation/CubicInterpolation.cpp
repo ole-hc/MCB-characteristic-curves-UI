@@ -6,16 +6,16 @@
 
 int main(void) {
     vector<vector<float>> aValues = {
-        {2.0f, 1.0f, 1.0f},
-        {4.0f, 4.0f, -2.0f},
-        {-2.0f, 2.0f, 3.0f}
+        {0.0f, 3.0f, -2.0f},
+        {4.0f, -2.0f, 1.0f},
+        {2.0f, -1.0f, 1.0f}
     };
     Matrix a = Matrix(3, 3, aValues);
 
     vector<vector<float>> cValues = {
-        {5.0f},
-        {2.0f},
-        {6.0f}
+        {-1.0f},
+        {-1.0f},
+        {8.0f}
     };
     Matrix c = Matrix(1, 3, cValues);
 
@@ -25,16 +25,16 @@ int main(void) {
         {5.0f, 9.0f},
         {8.0f, 10.0f}
     };
-    //Graph dataGraph = Graph(dataPoints);
-    //vector<Matrix> soe;
-    //soe = dataGraph.createMatrixes();
+    Graph dataGraph = Graph(dataPoints);
+    vector<Matrix> soe;
+    soe = dataGraph.createMatrixes();
     cout << "\n ---------------------------- \n";
      
-    //SystemOfEquations interpolation = SystemOfEquations(soe.at(0), soe.at(1));
-    //interpolation.printSystemOfEquations();
-
-    SystemOfEquations interpolation = SystemOfEquations(a, c);
+    SystemOfEquations interpolation = SystemOfEquations(soe.at(0), soe.at(1));
     interpolation.printSystemOfEquations();
+
+    //SystemOfEquations interpolation = SystemOfEquations(a, c);
+    //interpolation.printSystemOfEquations();
 
     return 0;
 }
