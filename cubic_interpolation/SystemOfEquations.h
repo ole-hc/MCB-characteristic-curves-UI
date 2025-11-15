@@ -20,5 +20,6 @@ public:
     float underDeterminant(int columnNr); 
     Matrix solveSystemOfEquations();
     Matrix solveLowerTriangularMatrix(Matrix l, Matrix p);
+    Matrix solveUpperTriangularMatrix(Matrix u, Matrix y);
     Matrix solveSystemOfEquationsCramersRule();
 };

@@ -46,22 +46,23 @@ Matrix SystemOfEquations::solveSystemOfEquations()
 {
     Matrix p = Matrix(a.getColumns(), a.getLines());
     Matrix l = Matrix(a.getColumns(), a.getLines());
+    Matrix r = a;
 
     for (size_t workingLine = 0; workingLine < a.getLines(); workingLine++)
     {
         // find pivot and switch lines accordingly in matrix a and p 
-        int indexBiggestAbsolute = a.findLineBiggestAbsoluteValue((workingLine + 1), (workingLine + 1));
-        a.switchLines((workingLine + 1), indexBiggestAbsolute);
+        int indexBiggestAbsolute = r.findLineBiggestAbsoluteValue((workingLine + 1), (workingLine + 1));
+        r.switchLines((workingLine + 1), indexBiggestAbsolute);
         p.switchLines((workingLine + 1), indexBiggestAbsolute);
 
-        for (size_t line = (workingLine + 1); line < a.getLines(); line++)
+        for (size_t line = (workingLine + 1); line < r.getLines(); line++)
         {
-            float coefficient = a.findCoefficientForLineBminusXA((workingLine + 1), (line + 1), (workingLine + 1));
-            a.subtractTwoLinesWithCoefficient(line, workingLine, coefficient);
+            float coefficient = r.findCoefficientForLineBminusXA((workingLine + 1), (line + 1), (workingLine + 1));
+            r.subtractTwoLinesWithCoefficient(line, workingLine, coefficient);
             l.setSpecificValue(line, workingLine, coefficient);
         }
         cout << "R: " << endl;
-        a.printMatrix();
+        r.printMatrix();
         cout << "P: " << endl;
         p.printMatrix();
         cout << "L: " << endl;
@@ -69,18 +70,19 @@ Matrix SystemOfEquations::solveSystemOfEquations()
         cout << endl;
     }
 
-    a = l;
-    p = p.multiplyMatrix(c);
-    Matrix solution = solveLowerTriangularMatrix(l, p);
-    return solution;
+    Matrix pc = p.multiplyMatrix(c);
+    Matrix y = solveLowerTriangularMatrix(l, pc);
+    Matrix x = solveUpperTriangularMatrix(r, y);
+    return x;
 }
 
-// solves triangular matrix l = p and return solution vector
+// solves triangular matrix l * y = pc and return solution vector
 // example:
-// ( 1 0 0 )       ( p1 )       ( 2 )
-// ( 2 1 0 )   *   ( p2 )   =   ( 4 )
-// ( 7 3 1 )       ( p3 )       ( 1 )
-Matrix SystemOfEquations::solveLowerTriangularMatrix(Matrix l, Matrix p)
+// !Only with 1 diagonal
+// ( 1 0 0 )       ( y1 )       ( 2 )
+// ( 2 1 0 )   *   ( y2 )   =   ( 4 )
+// ( 7 3 1 )       ( y3 )       ( 1 )
+Matrix SystemOfEquations::solveLowerTriangularMatrix(Matrix l, Matrix pc)
 {
     vector<vector<float>> solutionValues;
     for (size_t line = 0; line < l.getLines(); line++)
@@ -90,10 +92,34 @@ Matrix SystemOfEquations::solveLowerTriangularMatrix(Matrix l, Matrix p)
         {
             lineSolution += (l.getSpecificValue(line, column) * solutionValues[column][0]);
         }
-        lineSolution = p.getSpecificValue(line, 0) - lineSolution;
+        lineSolution = pc.getSpecificValue(line, 0) - lineSolution;
         solutionValues.push_back({lineSolution});
     }
-    Matrix solution = Matrix(p.getColumns(), l.getLines(), solutionValues);
+    Matrix solution = Matrix(pc.getColumns(), l.getLines(), solutionValues);
+    return solution;
+}
+
+// r * x = y
+// example:
+// ( 5 2 7 )       ( y1 )       ( 2 )
+// ( 0 2 3 )   *   ( y2 )   =   ( 4 )
+// ( 0 0 3 )       ( y3 )       ( 1 )
+Matrix SystemOfEquations::solveUpperTriangularMatrix(Matrix r, Matrix y)
+{
+    vector<vector<float>> solutionValues;
+    for (int line = (r.getLines() - 1); line >= 0; --line)
+    {
+        float lineSolution = 0.0;
+        for (size_t column = (r.getColumns() - 1); column > line; column--)
+        {
+            int actual = ((solutionValues.size() - 1) - (r.getColumns() - 1 - column));
+            lineSolution += (r.getSpecificValue(line, column) * solutionValues[((solutionValues.size() - 1) - (r.getColumns() -1 - column))][0]);
+        }
+        lineSolution = y.getSpecificValue(line, 0) - lineSolution;
+        lineSolution = lineSolution / r.getSpecificValue(line, line);
+        solutionValues.insert(solutionValues.begin(),{lineSolution});
+    }
+    Matrix solution = Matrix(y.getColumns(), r.getLines(), solutionValues);
     return solution;
 }
 

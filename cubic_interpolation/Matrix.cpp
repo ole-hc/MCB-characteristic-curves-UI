@@ -46,9 +46,10 @@ void Matrix::printMatrix()
 {
     for (size_t line = 0; line < lines; line++)
     {
-        cout << "|\t";
+        cout << "| ";
         for (size_t column = 0; column < columns; column++)
         {
+            cout << setprecision(3);
             cout << values[line][column] << "\t|\t"; 
         }
         cout << "\n";
