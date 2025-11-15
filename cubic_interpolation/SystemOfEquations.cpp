@@ -126,12 +126,12 @@ Matrix SystemOfEquations::solveUpperTriangularMatrix(Matrix r, Matrix y)
     return solution;
 }
 
-// pivotColumn == pivotLine
-void SystemOfEquations::swapLRowsForPivot(Matrix &l, size_t pivotColumn, size_t lineA, size_t lineB)
+// Swap values of two lines until specified column (column = pivotLine)
+void SystemOfEquations::swapLRowsForPivot(Matrix &l, size_t pivotLine, size_t lineA, size_t lineB)
 {    
     if(lineA == lineB) return;
 
-    for (size_t column = 0; column < pivotColumn; column++)
+    for (size_t column = 0; column < pivotLine; column++)
     {
         float temp = l.getSpecificValue(lineB, column);
         l.setSpecificValue(lineB, column, l.getSpecificValue(lineA, column));

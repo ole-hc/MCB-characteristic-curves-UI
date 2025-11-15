@@ -94,6 +94,7 @@ float Matrix::determinant()
     return determinant;
 }
 
+// switches lines with 1..n matrix addressing
 void Matrix::switchLines(int lineA, int lineB)
 {
     // decrement to match 1..n matrix addressing to 0..n-1 vector addressing
@@ -105,6 +106,7 @@ void Matrix::switchLines(int lineA, int lineB)
     values[lineB] = saveLine;
 }
 
+// finds biggest absolute value in a column from a start line with 1..n matrix addressing
 int Matrix::findLineBiggestAbsoluteValue(int column, int startLine)
 {
     // decrement to match 1..n matrix addressing to 0..n-1 vector addressing
@@ -123,6 +125,7 @@ int Matrix::findLineBiggestAbsoluteValue(int column, int startLine)
 }
 
 // returns the coefficient with witch line A must be multiplied for a B - A substraction to equate to zero
+// with 1..n matrix addressing
 float Matrix::findCoefficientForLineBminusXA(int column, int lineB, int lineA)
 {
     // decrement to match 1..n matrix addressing to 0..n-1 vector addressing
@@ -134,6 +137,7 @@ float Matrix::findCoefficientForLineBminusXA(int column, int lineB, int lineA)
 
 
 // lineA = lineA - (c * lineB)
+// with 0..n-1 matrix addressing
 void Matrix::subtractTwoLinesWithCoefficient(int lineA, int lineB, float coefficient)
 {
     for (size_t column = 0; column < columns; column++)
@@ -185,11 +189,13 @@ vector<vector<float>>& Matrix::getValues()
     return this->values;
 }
 
+// 0..n matrix addressing
 float Matrix::getSpecificValue(int _line, int _column)
 {
     return this->values[_line][_column];
 }
 
+// 0..n matrix addressing
 void Matrix::setSpecificValue(int _line, int _column, float _value)
 {
     this->values[_line][_column] = _value;

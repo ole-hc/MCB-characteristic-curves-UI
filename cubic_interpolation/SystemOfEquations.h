@@ -21,6 +21,6 @@ public:
     Matrix solveSystemOfEquations();
     Matrix solveLowerTriangularMatrix(Matrix l, Matrix p);
     Matrix solveUpperTriangularMatrix(Matrix u, Matrix y);
-    void swapLRowsForPivot(Matrix& l, size_t pivotColumn, size_t lineA, size_t lineB);
+    void swapLRowsForPivot(Matrix& l, size_t pivotLine, size_t lineA, size_t lineB);
     Matrix solveSystemOfEquationsCramersRule();
 };
