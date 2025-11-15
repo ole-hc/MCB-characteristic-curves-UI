@@ -52,8 +52,10 @@ Matrix SystemOfEquations::solveSystemOfEquations()
     {
         // find pivot and switch lines accordingly in matrix a and p 
         int indexBiggestAbsolute = r.findLineBiggestAbsoluteValue((workingLine + 1), (workingLine + 1));
+        cout << "Switch line: " << (workingLine + 1) << " with line: " << indexBiggestAbsolute << "\n";
         r.switchLines((workingLine + 1), indexBiggestAbsolute);
         p.switchLines((workingLine + 1), indexBiggestAbsolute);
+        swapLRowsForPivot(l, workingLine, workingLine, (indexBiggestAbsolute - 1));
 
         for (size_t line = (workingLine + 1); line < r.getLines(); line++)
         {
@@ -122,6 +124,20 @@ Matrix SystemOfEquations::solveUpperTriangularMatrix(Matrix r, Matrix y)
     }
     Matrix solution = Matrix(y.getColumns(), r.getLines(), solutionValues);
     return solution;
+}
+
+// pivotColumn == pivotLine
+void SystemOfEquations::swapLRowsForPivot(Matrix &l, size_t pivotColumn, size_t lineA, size_t lineB)
+{    
+    if(lineA == lineB) return;
+
+    for (size_t column = 0; column < pivotColumn; column++)
+    {
+        float temp = l.getSpecificValue(lineB, column);
+        l.setSpecificValue(lineB, column, l.getSpecificValue(lineA, column));
+        l.setSpecificValue(lineA, column, temp);
+    }
+    cout << "switched in l: " << lineA << " with: " << lineB << "\n";
 }
 
 // solves system of equations in a x b = c form with a beeing a (m x m) Matrix and b, c beeing (m x 1) vectors

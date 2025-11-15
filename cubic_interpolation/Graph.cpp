@@ -140,8 +140,10 @@ void Graph::evaluationEndPointsAssumption(vector<vector<float>> &_a, vector<vect
         float xI = 0;
         float yI = 0;
         int spline = 0;
+        int currentSplineIndex = 0;
         if(indexSpline == 1) {
             spline = (points.size() - 1);
+            currentSplineIndex = (points.size() - 2);
         }
         xI = points.at(spline).getX();
         yI = points.at(spline).getY();
@@ -152,7 +154,7 @@ void Graph::evaluationEndPointsAssumption(vector<vector<float>> &_a, vector<vect
         coefficients.push_back(0);
         coefficients.push_back(0);
 
-        vector<float> aRow = addSplineEquationToMatrixColumnOneEquation(indexSpline,coefficients);
+        vector<float> aRow = addSplineEquationToMatrixColumnOneEquation(currentSplineIndex, coefficients);
         _a.push_back(aRow);
         _c.push_back({0});
     }

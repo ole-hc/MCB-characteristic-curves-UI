@@ -49,7 +49,7 @@ void Matrix::printMatrix()
         cout << "| ";
         for (size_t column = 0; column < columns; column++)
         {
-            cout << setprecision(10);
+            cout << setprecision(3);
             cout << values[line][column] << "\t|\t"; 
         }
         cout << "\n";
